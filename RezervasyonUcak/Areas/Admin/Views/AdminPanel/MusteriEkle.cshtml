@@ -1,0 +1,56 @@
+﻿@model RezervasyonUcak.Areas.Admin.Model.Dto.UserRequest;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+
+}
+
+
+<form asp-action="kullaniciEkle" asp-controller="AdminPanel">
+    <div>
+        <label  asp-for="Name"></label>
+        <input class="form-control" asp-for="Name">
+        <span class="validation" asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="Surname"></label>
+        <input class="form-control" asp-for="Surname">
+        <span class="validation" asp-validation-for="Surname"></span>
+    </div>
+
+
+    <div>
+        <label asp-for="Email"></label>
+        <input class="form-control" asp-for="Email">
+        <span class="validation" asp-validation-for="Email"></span>
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input class="form-control" asp-for="Password">
+        <span asp-validation-for="Password" class="validation"></span>
+    </div>
+
+
+
+
+    <div>
+        <label asp-for="Role"></label>
+        <select class="form-control" asp-for="Role">
+            @foreach (var role in Enum.GetValues(typeof(RezervasyonUcak.Models.Role)))
+            {
+                <option value="@role">@role</option>
+            }
+        </select>
+    </div>
+
+
+
+
+    <input type="submit" value="Kaydet" />
+</form>
+
+        

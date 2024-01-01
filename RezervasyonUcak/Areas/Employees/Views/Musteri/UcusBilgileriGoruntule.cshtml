@@ -1,0 +1,56 @@
+﻿@model List<RezervasyonUcak.Areas.Employees.Models.UcusSefer>
+
+@{
+    Layout = "~/Areas/Employees/Views/Shared/Layout.cshtml";
+}
+
+<div class="container" style="margin:50px">
+    <h4>Uçuş Bilgileri</h4>
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive" data-pattern="priority-columns">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Başlangıç Konumu</th>
+                        <th>Varış Konumu</th>
+                        <th>Başlangıç Saati</th>
+                        <th>Varış Saati</th>
+                        <th>Uçak Model Numarası</th>
+                        <th>Firma</th>
+                        <th>Fiyat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ucus in Model)
+                    {
+                        <tr>
+                            <td>@(ucus.UcusKonum?.BaslangicKonum ?? "Bilinmiyor")</td>
+                            <td>@(ucus.UcusKonum?.VarisKonum ?? "Bilinmiyor")</td>
+                            <td>@(ucus.BaslangicSaat ?? "Bilinmiyor")</td>
+                            <td>@(ucus.VarisSaati ?? "Bilinmiyor")</td>
+                            <td>@(ucus.Ucak?.ModelNo ?? "Bilinmiyor")</td>
+                            <td>@(ucus.Ucak?.Firma?.FirmaAdi ?? "Bilinmiyor")</td>
+                            <td>@(ucus.UcusFiyat.ToString("0.00") ?? "Bilinmiyor")</td>
+                            <td><button onclick="getSeats(@ucus.UcusId)">Koltukları Gör</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            Seçilen kriterlere uygun uçuş seferi bulunamadı.
+        </div>
+    }
+</div>
+
+
+<script type="text/javascript">
+    function getSeats(ucusId) {
+        console.log(ucusId);
+        window.location.href = "https://localhost:7004/Employees/Musteri/KoltukGetir?id=" + ucusId;
+    }
+</script>

@@ -1,0 +1,107 @@
+﻿@{
+    Layout = "~/Areas/Employees/Views/Shared/Layout.cshtml";
+
+
+}
+
+@model RezervasyonUcak.Areas.Employees.Models.Dto.UcusSeferResponse;
+
+
+<h3>Uçak Firması : @Model.FirmaAdi</h3>
+<h3>Uçuş Güzergahı : @Model.BaslangicKonum-@Model.VarisKonum</h3>
+
+<h3>Uçuş Saatleri : @Model.BaslangicSaat - @Model.VarisSaati</h3>
+<h3>Koltuklar</h3>
+
+<div id="seat-map">
+
+    @for (int i = 0; i < @Model.koltuklar.Count; i += 4)
+    {
+        <div class="row">
+            @for (int j = 0; j < 4 && i + j < @Model.koltuklar.Count; j++)
+            {
+
+                <div onclick="showPopup(this,'@Model.koltuklar[i+j].KoltukNo')" style="background-color: @((Model.koltuklar[i+j].DoluMu) ? "red" : "green"); @(Model.koltuklar[i+j].DoluMu ? "pointer-events: none;" : "")" id="@Model.UcakId" class="seat">@Model.koltuklar[i+j].KoltukNo</div>
+
+            }
+
+        
+        </div>
+
+
+    }
+
+  </div>
+
+
+<button onclick="ilerle('@Model.UcusId')"  class="btn btn-info">Satın Al</button>
+
+
+<style>
+    
+
+
+    #seat-map {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .row {
+        display: flex;
+        justify-content: center;
+    }
+
+    .seat {
+        width: 30px;
+        height: 30px;
+        margin: 5px;
+        background-color: #ccc;
+        cursor: pointer;
+    }
+
+        .seat.booked {
+            background-color: #f00; /* Örnek olarak dolu koltukları kırmızı olarak işaretliyoruz */
+        }
+</style>
+
+
+
+    <script type="text/javascript">
+
+        var secilenKoltukNo;
+        var ucakId;
+    var secilenKoltukDiv;
+
+    function ilerle(ucus) {
+        console.log("asdsadsa");
+
+       // window.location.href = `https://localhost:7004/Employees/Musteri/BiletBilgiEkrani?ucusId=${ucus}&koltukNo=${secilenKoltukNo}`;
+
+        window.location.href = `https://localhost:7004/Employees/Musteri/BiletAl?ucusId=${ucus}&koltukNo=${secilenKoltukNo}`;
+
+    }
+
+
+    function showPopup(item,koltukNo) {
+        secilenKoltukNo = koltukNo;
+        ucakId = item.id;
+   
+            if (secilenKoltukDiv) {
+                secilenKoltukDiv.style.backgroundColor = "green";
+            }
+            item.style.backgroundColor = "red";
+            secilenKoltukNo = koltukNo;
+            secilenKoltukDiv = item;
+        alert("Seçilen koltuk: " + secilenKoltukNo);
+
+        
+
+        // Popup mesajı burada gösterebilir ve istediğiniz işlemleri yapabilirsiniz
+    }
+
+ 
+
+
+
+
+</script>

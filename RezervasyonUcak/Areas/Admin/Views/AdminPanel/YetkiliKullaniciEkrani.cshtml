@@ -1,0 +1,106 @@
+﻿@model ICollection<RezervasyonUcak.Models.User>;
+
+
+
+@{
+
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+
+}
+
+
+<div class="container" style="margin:50px">
+
+    <h2>Yetkili Bilgileri</h2>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive" data-pattern="priority-columns">
+                <table summary="This table shows how to create responsive tables using RWD-Table-Patterns' functionality" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">Düzenle</th>
+
+                            <th data-priority="1">Yetkili ID</th>
+                            <th data-priority="2">Ad</th>
+                            <th data-priority="3">Soyad</th>
+                            <th data-priority="4">E Mail</th>
+                            <th data-priority="5">Şifre</th>
+                            <th data-priority="6">Rol</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var musteri in Model)
+                        {
+                            <tr>
+                                <th data-priority="1">
+                                    <button class="btn">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                </th>
+                                <td> <input size="5" value="@musteri.Id"> </td>
+                                <td><input size="5" value="@musteri.Name"></td>
+                                <td><input size="5" value="@musteri.Surname"></td>
+                                <td><input size="5" value="@musteri.Email"></td>
+                                <td><input size="5" value="@musteri.Password"></td>
+                                <td><input size="5" value="@musteri.Role"></td>
+
+                                <td> <button onclick="kullaniciSil('@musteri.Id')" class="btn btn-light">Sil</button></td>
+                                <td>   <button id="updateButton" type="button" class="btn btn-light">Güncelle</button></td>
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    function toggleInputs() {
+        var inputs = document.querySelectorAll('tr input');
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = !inputs[i].disabled;
+        }
+        var updateButton = document.getElementById("updateButton");
+        updateButton.disabled = !updateButton.disabled;
+    }
+
+    document.querySelector('.fa-edit').addEventListener('click', function () {
+        toggleInputs();
+    });
+
+
+    function kullaniciSil(id) {
+        console.log(id);
+
+        fetch(`https://localhost:7004/Admin/AdminPanel/delete?id=${id}`, {
+            method: 'POST',
+        }
+
+        ).then(response => {
+            if (response.ok) {
+                window.location.reload();
+
+            }
+            else {
+
+            }
+
+
+        }).catch(error => {
+
+        });
+
+
+    }
+
+
+</script>
