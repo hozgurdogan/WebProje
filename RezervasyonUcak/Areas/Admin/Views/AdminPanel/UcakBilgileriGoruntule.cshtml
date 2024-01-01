@@ -1,0 +1,43 @@
+﻿@{
+
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+
+}
+
+@model List<RezervasyonUcak.Areas.Employees.Models.Ucak>
+
+<div class="container" style="margin:50px">
+
+    <h2>Uçak Bilgileri</h2>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive" data-pattern="priority-columns">
+                <table summary="This table shows how to create responsive tables using RWD-Table-Patterns' functionality" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">Uçak Id</th>
+                            <th data-priority="2">Uçak Firması</th>
+                            <th data-priority="3">ModelNumarası</th>
+                            <th data-priority="4">Koltuk Sayısı</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ucak in Model)
+                        {
+                            <tr>
+                                <td>@ucak.UcakId</td>
+                                <td>@ucak.Firma.FirmaAdi</td>
+                                <td>@ucak.ModelNo</td>
+                                <td>@ucak.KoltukSayisi</td>
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

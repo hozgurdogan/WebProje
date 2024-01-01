@@ -1,0 +1,139 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+    
+}
+@model ICollection<RezervasyonUcak.Areas.Employees.Models.Firma>;
+
+<form asp-controller="AdminPanel" asp-action="SeferEkle">
+
+    <div class="col-md-4">
+    <label for="bKonum">Başlangıç Konum</label>
+    <input class="form-control" name="bKonum" type="text" />
+    </div>
+
+    <div class="col-md-4">
+    <label for="vKonum">Varış Konum</label>
+    <input class="form-control" name="vKonum" type="text" />
+    </div>
+
+    <div class="col-md-4">
+    <label for="date">Sefer Tarihi</label>
+    <input class="form-control" name="date" type="date" />
+    </div>
+
+    <div class="col-md-4">
+    <select id="firmaSelect">
+        @foreach (var item in Model)
+        {
+            <option value="@item.FirmaId">@item.FirmaAdi</option>
+        }
+        </select>
+    </div>
+   @* <div class="col-md-4">
+
+    <select id="ucakSelect">
+        <!-- Seçilen firmanın uçakları burada listelenecek -->
+    </select>
+    </div>*@
+
+    <div class="col-md-4">
+
+        <label for="selectedTime">Kalkış Saati</label>
+
+        <input type="text" id="txtSelectedTime" name="selectedTime" class="form-control" />
+    </div>
+
+    <div class="col-md-4">
+
+        <label for="selectedTime2">Varış Saati</label>
+
+        <input type="text" id="txtSelectedTime2" name="selectedTime2" class="form-control" />
+    </div>
+
+
+    <div class="col-md-4">
+       
+        <input class="form-control" value="Ekle" type="submit" />
+    </div>
+
+   
+
+   
+</form>
+
+
+<script type="text/javascript">
+
+
+
+
+
+
+    $('#txtSelectedTime').timepicker({
+        timeFormat: 'H:mm',
+        interval: 1,
+        minTime: '00:00',
+        maxTime: '23:00',
+        defaultTime: '11',
+        startTime: '10:00',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true
+    });
+
+    $('#txtSelectedTime2').timepicker({
+        timeFormat: 'H:mm',
+        interval: 1,
+        minTime: '00:00',
+        maxTime: '23:00',
+        defaultTime: '11',
+        startTime: '10:00',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true
+    });
+
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var firmaSelect = document.getElementById('firmaSelect');
+        var ucakSelect = document.getElementById('ucakSelect');
+
+        
+
+        firmaSelect.addEventListener('change', function () {
+            var selectedFirmaId = this.value;
+            console.log(selectedFirmaId);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://localhost:7004/Admin/AdminPanel/GetUcaklar?firmaId=' + selectedFirmaId, true);
+            console.log(xhr);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    console.log(data);
+
+                    ucakSelect.innerHTML = '';
+                    data.forEach(function (item) {
+                        console.log(item.Firma.FirmaId)
+                        var option = document.createElement('option');
+                        option.value = item.UcakId;
+                        option.textContent = item.ModelNo;
+                        ucakSelect.appendChild(option);
+                    });
+                } else {
+                    // Hata durumunda yapılacak işlemler
+                }
+            };
+            xhr.send();
+        });
+    });
+</script>

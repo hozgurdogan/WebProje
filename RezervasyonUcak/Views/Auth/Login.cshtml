@@ -1,0 +1,31 @@
+﻿
+@model Login
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<form asp-action="_Login" asp-controller="Auth" class="d-flex flex-column justify-content-center">
+    <h2>
+        @ViewBag.Message
+    </h2>
+ 
+    <div class="col-md-4 mx-auto">
+        <label asp-for="Mail"></label>
+        <input class="form-control" asp-for="Mail">
+        <span asp-validation-for="Mail"></span>
+    </div>
+    <div class="col-md-4 mx-auto">
+        <label asp-for="Password"></label>
+        <input class="form-control" asp-for="Password">
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div class="col-md-4 mx-auto">
+       <h5>@ViewBag.LoginErrorMessage</h5>
+
+    </div>
+    <div class="col-md-2 mx-auto">
+        <input type="submit" value="Giriş Yap" />
+    </div>
+    <div class="col-md-2 mx-auto">
+        <a asp-controller="Auth" asp-action="Register">Kayıt Ol</a>
+    </div>
+</form>
+

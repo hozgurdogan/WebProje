@@ -1,0 +1,161 @@
+﻿@{
+	Layout = "~/Areas/Employees/Views/Shared/Layout.cshtml";
+	
+	
+}
+
+@model ICollection<RezervasyonUcak.Areas.Employees.Models.UcusKonum>;
+
+	<style>
+	body {
+		margin: 0;
+		padding: 0;
+		background-color: #ebfffb;
+	}
+
+	.box {
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 20px;
+		margin-top:10px;
+		margin-bottom:50px;
+	}
+
+		.box select {
+			background-color: #5abfab;
+			color: white;
+			padding: 12px;
+			width: 250px;
+			border: none;
+			font-size: 20px;
+			box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+			-webkit-appearance: button;
+			appearance: button;
+			outline: none;
+		}
+
+		.box::before {
+			font-family: FontAwesome;
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 20%;
+			height: 100%;
+			text-align: center;
+			font-size: 28px;
+			line-height: 45px;
+			color: rgba(255, 255, 255, 0.5);
+			background-color: rgba(255, 255, 255, 0.1);
+			pointer-events: none;
+		}
+
+		.box:hover::before {
+			color: rgba(255, 255, 255, 0.6);
+			background-color: rgba(255, 255, 255, 0.2);
+		}
+
+		.box select option {
+			padding: 30px;
+		}
+
+
+	.title {
+		text-align: left;
+		font-weight: bold;
+		padding-top:5%;
+	}
+
+	.containers {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		height: 100vh;
+	}
+
+</style>
+
+<form  >
+
+
+	<div class="containers">
+		
+	<div>
+		<div class="title">Güzergah Seç</div>
+	<div class="box">
+				<select id="flightId"  >
+	@foreach(var item in Model)
+	{
+		<option value="@item.Id">@item.BaslangicKonum - @item.VarisKonum</option>
+
+	}
+		</select>
+	</div>
+
+</div>
+
+	<div>
+		<div class="title">Tarih</div>
+			<input type="date" class="box" id="flightDate" />
+		</div>
+
+		<div class="box">
+			
+
+		</div>
+
+	</div>
+
+
+</form>
+<button onclick="sender()" class="btn btn-info">Uçuş Ara</button>
+
+<script  type="text/javascript">
+
+
+	function sender() {
+		var selectedId;
+		var selectedDate;
+		selectedId = document.getElementById("flightId").value;
+		selectedDate = document.getElementById("flightDate").value;
+
+
+		window.location.href = `https://localhost:7004/Employees/Musteri/UcusBilgileriGoruntule?konumId=${selectedId}&tarih_=${selectedDate}`;
+
+		
+	}
+
+	
+		
+	/*	var selectedId;
+		var selectedDate;
+		var list = [{}];
+
+
+			selectedId = document.getElementById("flightId").value;
+			selectedDate = document.getElementById("flightDate").value;
+
+
+		//window.location.href = `https://localhost:7004/Employees/Musteri/UcusBilgileriGoruntule?konumId=${selectedId}&tarih_=${selectedDate}`;
+	}
+	*/
+
+		//fetch(`https://localhost:7004/Employees/Musteri/UcusGetir?konumId=${selectedId}&tarih_=${selectedDate}`, {
+	//		method: "GET",
+
+//		})
+	//		.then(response => response.json())
+		//	.then(data => {
+			//	console.log(data);
+			//	list.push(data);
+		//	});
+
+
+
+//	}
+//
+	//);
+
+		
+	
+</script>
