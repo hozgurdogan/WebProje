@@ -1,0 +1,91 @@
+﻿@{
+    Layout = "~/Areas/Employees/Views/Shared/Layout.cshtml";
+
+
+}
+@model RezervasyonUcak.Models.User;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+
+<form asp-controller="Musteri" asp-action="musteriGuncelle">
+
+
+
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+   
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Hesap Bilgilerim</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">İsim</label><input asp-for="Name" type="text" class="form-control"  value="@Model.Name"></div>
+                    <div class="col-md-6"><label class="labels">Soyisim</label><input asp-for="Surname" type="text" class="form-control" value="@Model.Surname" placeholder="surname"></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Mail</label><input asp-for="Email" type="text" class="form-control"  value="@Model.Email"></div>
+                    <div class="col-md-12"><label class="labels">Şifre</label><input asp-for="Password" type="text" class="form-control"  value="@Model.Password"></div>
+                </div>
+           
+                <div class="mt-5 text-center"><input type="submit" class="btn btn-primary profile-button" value="Bilgileri Güncelle"></input></div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+</div>
+</div>
+
+</form>
+
+
+                    <style>
+
+
+
+    body {
+        background-color:#ebfffb
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #ebfffb
+    }
+
+    .profile-button {
+        background: #ebfffb box-shadow: none;
+        border: none
+    }
+
+        .profile-button:hover {
+            background: #ebfffb
+        }
+
+        .profile-button:focus {
+            background: #ebfffb box-shadow: none
+        }
+
+        .profile-button:active {
+            background: #682773;
+            box-shadow: none
+        }
+
+    .back:hover {
+        color: #682773;
+        cursor: pointer
+    }
+
+    .labels {
+        font-size: 11px
+    }
+
+    .add-experience:hover {
+        background: #BA68C8;
+        color: #fff;
+        cursor: pointer;
+        border: solid 1px #BA68C8
+    }
+                    </style>

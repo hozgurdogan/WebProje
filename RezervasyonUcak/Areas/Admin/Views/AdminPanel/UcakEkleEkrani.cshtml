@@ -1,0 +1,79 @@
+﻿
+@{
+
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+
+}
+@model RezervasyonUcak.Areas.Admin.Model.Dto.UcakEkleRequest;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+    <h2>@ViewBag.msg</h2>
+<form asp-controller="AdminPanel" asp-action="UcakEkle">
+
+
+    <div>
+        <label asp-for="ModelNo">Uçak Model Numarası</label>
+        <input class="form-control" asp-for="ModelNo">
+        <span class="validation" asp-validation-for="ModelNo"></span>
+    </div>
+  
+    <div>
+        <label asp-for="KoltukSayisi"> Koltuk Sayısı</label>
+        <input class="form-control" asp-for="KoltukSayisi">
+        <span class="validation" asp-validation-for="KoltukSayisi"></span>
+    </div>
+
+
+
+    <div>
+        <label asp-for="FirmaId">Uçak Firması</label>
+        <select class="form-control" asp-for="FirmaId" id="firma">
+        
+        </select>
+    </div>
+
+    <input  type="submit"  value="Kaydet"/>
+
+</form>
+
+
+    <script type="text/javascript">
+        
+    
+    
+    
+    
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        var ucakSelect = document.getElementById('firma');
+
+
+
+      
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://localhost:7004/Admin/AdminPanel/GetUcakFirma',  true);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    console.log(data);
+
+                    ucakSelect.innerHTML = '';
+                    data.forEach(function (item) {
+                        var option = document.createElement('option');
+                    option.value = item.FirmaId;
+                        option.textContent = item.FirmaAdi;
+                        ucakSelect.appendChild(option);
+                    });
+                } else {
+                    // Hata durumunda yapılacak işlemler
+                }
+            };
+            xhr.send();
+        });
+   
+    
+    
+    
+    </script>

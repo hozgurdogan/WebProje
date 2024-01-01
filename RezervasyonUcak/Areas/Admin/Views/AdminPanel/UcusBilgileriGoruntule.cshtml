@@ -1,0 +1,58 @@
+﻿@{
+
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+
+}
+
+@model List<RezervasyonUcak.Areas.Employees.Models.UcusSefer>
+<div class="container" style="margin:50px">
+
+    <h2>Uçak Bilgileri</h2>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive" data-pattern="priority-columns">
+                <table summary="This table shows how to create responsive tables using RWD-Table-Patterns' functionality" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">Uçuş Id</th>
+                            <th data-priority="2">Uçak Firması</th>
+                            <th data-priority="3">Uçak Model Numarası</th>
+                            <th data-priority="4">Uçuş Tarihi</th>
+                            <th data-priority="5">Nereden</th>
+                            <th data-priority="6">Nereye</th>
+                            <th data-priority="7">Uçuş Saati</th>
+                            <th data-priority="8">Tahmini Varış Saati</th>
+                     
+                            <th data-priority="9">Uçuş Fiyatı</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ucak in Model)
+                        {
+                            <tr>
+                                <td>@ucak.UcusId</td>
+                                <td>@ucak.Ucak.Firma.FirmaAdi</td>
+                                <td>@ucak.Ucak.ModelNo</td>
+                                <td>@ucak.UcusKonum.Tarih.UcusTarihi.Date</td>
+                                <td>@ucak.UcusKonum.BaslangicKonum</td>
+                                <td>@ucak.UcusKonum.VarisKonum</td>
+                                <td>@ucak.BaslangicSaat</td>
+                                <td>@ucak.VarisSaati</td>
+                                <td>@ucak.UcusFiyat</td>
+
+
+
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

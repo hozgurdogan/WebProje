@@ -1,0 +1,120 @@
+﻿@{
+    Layout = "~/Areas/Employees/Views/Shared/Layout.cshtml";
+
+
+}
+@model List<RezervasyonUcak.Areas.Employees.Models.Dto.BiletResponse>
+
+
+    
+    <link rel="stylesheet" href="~/css/ticket.css" />
+
+<main class="ticket-system">
+ 
+    @foreach(var bilet in Model)
+    {
+        
+  
+
+    <div class="receipts-wrapper">
+        <div class="receipts">
+            <div class="receipt">
+
+                <div class="item">
+                    <span>@bilet.FirmaAdi</span>
+                    <h3></h3>
+                </div>
+                <div class="route">
+                        <h2>@bilet.BaslangicKonum</h2>
+                    <svg class="plane-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510 510">
+                        <path fill="#3f32e5" d="M497.25 357v-51l-204-127.5V38.25C293.25 17.85 275.4 0 255 0s-38.25 17.85-38.25 38.25V178.5L12.75 306v51l204-63.75V433.5l-51 38.25V510L255 484.5l89.25 25.5v-38.25l-51-38.25V293.25l204 63.75z" />
+                    </svg>
+                        <h2>@bilet.VarisKonum</h2>
+                </div>
+                <div class="details">
+                    <div class="item">
+                        <span>Yolcu</span>
+                            <h3>@bilet.YolcuAdi @bilet.YolcuSoyadi</h3>
+
+                    </div>
+                    <div class="item">
+                        <span>Uçak Model No</span>
+                            <h3>@bilet.UcakModelNo</h3>
+                    </div>
+                    <div class="item">
+                        <span>Uçuş Saatleri</span>
+                            <h3>@bilet.BaslangicSaat - @bilet.BitisSaat</h3>
+                    </div>
+                    <div class="item">
+                        <span>Tarih</span>
+                        <h3>@bilet.UcusTarihi</h3>
+                    </div>
+                    <div class="item">
+                        <span>Bilet Fiyatı</span>
+                            <h3>@bilet.BiletFiyat TL</h3>
+                    </div>
+               
+                    <div class="item">
+                        <span>Koltuk Numarası</span>
+                            <h3>@bilet.KoltukNo</h3>
+                    </div>
+                        <div class="item">
+                            <span>Bilet Durumu</span>
+                            @if(bilet.Iptal)
+                            {
+                                <h3>İptal Edildi</h3>
+                            }
+                            @if(bilet.Iptal==false)
+                            {
+                                <h3> Aktif</h3>
+
+                            }
+
+                        
+                           
+                        </div>
+                        @if(bilet.Iptal==false)
+                        {
+                            <div class="item">
+                                <button class="btn btn-outline-dark" onclick="iptalet('@bilet.Id')">Bileti İptal Et</button>
+                              
+                            </div>
+                        }
+                  
+                      
+                </div>
+            </div>
+       
+        </div>
+    </div>
+    }
+</main>
+
+
+                <script type="text/javascript">
+                    
+                
+                
+                
+                function iptalet(id)
+                {
+
+        fetch("https://localhost:7004/Employees/Musteri/BiletIptal?biletId=" + id, {
+            method: "POST"
+        })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = "https://localhost:7004/Employees/Musteri/BiletlerGetir"; // Aynı sayfaya yönlendirme
+                }
+            })
+            .catch(error => {
+                console.error("İstek hatası:", error);
+            });
+
+                }
+                
+                
+                
+                
+                
+                </script>
