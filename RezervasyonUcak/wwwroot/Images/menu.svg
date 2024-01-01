@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="46" height="21.913" viewBox="0 0 46 21.913">
+  <g id="Group_1779" data-name="Group 1779" transform="translate(-345 -49.042)">
+    <path id="Union_45" data-name="Union 45" d="M22,22a2,2,0,1,1,0-4H44a2,2,0,1,1,0,4ZM2,13A2,2,0,0,1,2,9H44a2,2,0,1,1,0,4Z" transform="translate(345 48.955)" fill="#ff5100"/>
+    <g id="Group_1766" data-name="Group 1766" transform="translate(2238.257 110.131) rotate(180)">
+      <rect id="Rectangle_1636" data-name="Rectangle 1636" width="4" height="25.541" rx="2" transform="translate(1873.236 57.089) rotate(90)" fill="#ff854e"/>
+      <rect id="Rectangle_1637" data-name="Rectangle 1637" width="4" height="20.512" rx="2" transform="translate(1868.207 57.089) rotate(90)" fill="#4dbde9"/>
+      <rect id="Rectangle_1638" data-name="Rectangle 1638" width="4" height="15.353" rx="2" transform="translate(1863.047 57.089) rotate(90)" fill="#00a0df"/>
+      <rect id="Rectangle_1639" data-name="Rectangle 1639" width="4" height="10.238" rx="2" transform="translate(1857.933 57.089) rotate(90)" fill="#006068"/>
+      <ellipse id="Ellipse_138" data-name="Ellipse 138" cx="1.99" cy="1.99" rx="1.99" ry="1.99" transform="translate(1881.257 57.089) rotate(90)" fill="#ff5100"/>
+    </g>
+  </g>
+</svg>
